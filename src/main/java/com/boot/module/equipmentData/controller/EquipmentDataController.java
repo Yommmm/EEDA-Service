@@ -70,4 +70,10 @@ public class EquipmentDataController {
     	return equipmentDataService.getEquipmentData(equipmentDataVO);
     }
     
+    @GetMapping("/list")
+    @ApiOperation(value = "查询设备数据", notes="查询设备数据 API", produces = "application/json")
+    public Object list() throws Exception {
+    	return equipmentDataService.list();
+    }
+    
 }

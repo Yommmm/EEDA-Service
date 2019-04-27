@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.module.equipmentInfo.bean.EquipmentInfo;
 import com.boot.module.equipmentInfo.repository.EquipmentInfoRepository;
@@ -23,7 +24,12 @@ public class EquipmentInfoService {
    	 * 保存EquipmentInfo
    	 * @param equipmentInfo
    	 */
+    @Transactional
     public EquipmentInfo saveEquipmentInfo(EquipmentInfo equipmentInfo) throws Exception {
+    	EquipmentInfo findByEMac = equipmentInfoRepository.findByEMac(equipmentInfo.geteMac());
+    	if(null != findByEMac) {
+    		throw new IllegalArgumentException(equipmentInfo.geteMac());
+    	}
     	equipmentInfo = this.equipmentInfoRepository.save(equipmentInfo);
     	return equipmentInfo;
     }
@@ -32,6 +38,7 @@ public class EquipmentInfoService {
 	 * 删
 	 * @param equipmentInfoId XXXX
 	 */
+    @Transactional
     public String delEquipmentInfo(String equipmentInfoId) throws Exception {
     	this.equipmentInfoRepository.deleteById(equipmentInfoId);
     	return equipmentInfoId;
@@ -41,6 +48,7 @@ public class EquipmentInfoService {
 	 * 修改EquipmentInfo
 	 * @param equipmentInfo XXXX
 	 */
+    @Transactional
     public EquipmentInfo updateEquipmentInfo(String equipmentInfoId, EquipmentInfo equipmentInfo) throws Exception {
     	return equipmentInfo;
     }
@@ -71,6 +79,10 @@ public class EquipmentInfoService {
     	// TODO
     }
     
+    public String getCommandByMac(String eMac) {
+    	EquipmentInfo equipmentInfo = equipmentInfoRepository.findByEMac(eMac);
+    	return equipmentInfo.geteCmd();
+    }
     
 }
 

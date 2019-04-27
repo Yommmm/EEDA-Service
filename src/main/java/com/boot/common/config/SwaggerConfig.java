@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Environmental Equipment Data Acquisition")
+                .title("环保设备数据采集服务接口文档")
                 .description("powered by EEDA")
                 .termsOfServiceUrl("http://yommmm.github.com/")
                 .version("1.0")
