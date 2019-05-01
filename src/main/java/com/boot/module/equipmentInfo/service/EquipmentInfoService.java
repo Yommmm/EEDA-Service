@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,8 +73,10 @@ public class EquipmentInfoService {
 	 * 查
 	 * @param equipmentInfo XXXX
 	 */
-    public Page<EquipmentInfoVO> getEquipmentInfo(EquipmentInfoVO conditions) throws Exception {
-    	return null;
+    public Page<EquipmentInfo> getEquipmentInfo(EquipmentInfoVO conditions) throws Exception {
+    	Pageable pageable = PageRequest.of(conditions.getPageNum(), conditions.getPageSize());
+    	Page<EquipmentInfo> findAll = equipmentInfoRepository.findAll(pageable);
+    	return findAll;
     }
     
     private void translate(EquipmentInfoVO equipmentInfoVO) {

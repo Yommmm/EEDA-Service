@@ -35,6 +35,10 @@ public class EquipmentInfoVO {
 	 */
 	@ApiModelProperty(value = "所属区")
 	private String eDistrict;
+	
+	private Integer pageSize;
+	
+	private Integer pageNum;
 
 	public String geteId() {
 		return eId;
@@ -74,6 +78,22 @@ public class EquipmentInfoVO {
 
 	public void seteDistrict(String eDistrict) {
 		this.eDistrict = eDistrict;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getPageNum() {
+		return pageNum - 1;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
 	}
 	
 }
