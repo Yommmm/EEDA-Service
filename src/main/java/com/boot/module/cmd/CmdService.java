@@ -26,6 +26,7 @@ public class CmdService {
 	public EquipmentInfo setCommand(CommandVO commandVO) {
 		EquipmentInfo equipmentInfo = equipmentInfoRepository.findByEMac(commandVO.geteMac());
 		equipmentInfo.seteCmd(commandVO.getCommand());
+		equipmentInfo.seteCount(0);
 		
 		equipmentInfo = equipmentInfoRepository.save(equipmentInfo);
 		return equipmentInfo;

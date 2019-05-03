@@ -36,6 +36,10 @@ public class EquipmentInfo {
     @Column(name = "e_mac")
     @ApiModelProperty(value = "环保设备MAC地址")
 	private String eMac;
+    
+    @Column(name = "e_count")
+    @ApiModelProperty(value = "命令执行次数")
+    private Integer eCount;
 	
 	/**
 	 * 所属省
@@ -116,6 +120,14 @@ public class EquipmentInfo {
 
 	public void seteName(String eName) {
 		this.eName = eName;
+	}
+
+	public Integer geteCount() {
+		return eCount;
+	}
+
+	public void seteCount(Integer eCount) {
+		this.eCount = eCount;
 	}
 	
 }

@@ -56,11 +56,11 @@ public class EquipmentDataController {
     	return equipmentDataService.updateEquipmentData(equipmentDataId, equipmentData);
     }
     
-    @GetMapping("/{equipmentDataId}")
+    @GetMapping("/{eMac}")
     @ApiOperation(value = "查询设备数据", notes="查询设备数据 API", produces = "application/json")
-    @ApiImplicitParam(name = "equipmentDataId", value = "设备数据", dataType = "String", paramType = "path")
-    public Object getEquipmentData(@PathVariable String equipmentDataId) throws Exception {
-    	return equipmentDataService.getEquipmentData(equipmentDataId);
+    @ApiImplicitParam(name = "eMac", value = "设备Mac", dataType = "String", paramType = "path")
+    public Object getEquipmentData(@PathVariable String eMac) throws Exception {
+    	return equipmentDataService.getEquipmentData(eMac);
     }
     
     @PostMapping("/queryWithPage")

@@ -28,6 +28,7 @@ public class EquipmentInfoService {
    	 */
     @Transactional
     public EquipmentInfo saveEquipmentInfo(EquipmentInfo equipmentInfo) throws Exception {
+    	equipmentInfo.seteCount(0);
     	EquipmentInfo findByEMac = equipmentInfoRepository.findByEMac(equipmentInfo.geteMac());
     	if(null != findByEMac) {
     		throw new IllegalArgumentException(equipmentInfo.geteMac());
@@ -85,7 +86,13 @@ public class EquipmentInfoService {
     
     public String getCommandByMac(String eMac) {
     	EquipmentInfo equipmentInfo = equipmentInfoRepository.findByEMac(eMac);
-    	return equipmentInfo.geteCmd();
+    	if(equipmentInfo.geteCount() == 0) {
+    		equipmentInfo.seteCount(equipmentInfo.geteCount() + 1);
+    		equipmentInfoRepository.save(equipmentInfo);
+    		return equipmentInfo.geteCmd();
+    	} else {
+    		return "NOT";
+    	}
     }
     
 }

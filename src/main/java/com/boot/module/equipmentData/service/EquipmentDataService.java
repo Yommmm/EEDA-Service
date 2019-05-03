@@ -53,14 +53,11 @@ public class EquipmentDataService {
 	 * 通过equipmentDataID查询EquipmentData
 	 * @param equipmentDataId XXXX
 	 */
-    public EquipmentDataVO getEquipmentData(String equipmentDataId) throws Exception {
-    	EquipmentData equipmentData = this.equipmentDataRepository.getOne(equipmentDataId);
-    	EquipmentDataVO equipmentDataVO = new EquipmentDataVO();
-    	
-    	BeanUtils.copyProperties(equipmentData, equipmentDataVO);
-    	this.translate(equipmentDataVO);
-    	
-    	return equipmentDataVO;
+    public EquipmentData getEquipmentData(String eMac) throws Exception {
+    	List<EquipmentData> list = this.equipmentDataRepository.findEquipmentDataByEMacOrderByCreateTimeDesc(eMac);
+    	EquipmentData equipmentData = null != list && list.size() > 0 ? list.get(0) : null;
+    			
+    	return equipmentData;
     }
     
     /**
