@@ -1,6 +1,8 @@
 package com.boot.module.equipmentData.bean;
 
 import java.util.Date;
+import java.util.TimeZone;
+import java.util.Timer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,6 +38,10 @@ public class EquipmentData {
     @Column(name = "e_mac")
     @ApiModelProperty(value = "数据来源设备mac地址")
 	private String eMac;
+    
+    @Column(name = "e_name")
+    @ApiModelProperty(value = "数据来源设备名称")
+    private String eName;
 	
 	/**
 	 * 数据来源设备IP地址
@@ -63,6 +71,7 @@ public class EquipmentData {
     
     @Column(name = "create_time")
     @ApiModelProperty(value = "采集时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
 	public String geteDataId() {
@@ -127,6 +136,14 @@ public class EquipmentData {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public void seteName(String eName) {
+		this.eName = eName;
 	}
 	
 }

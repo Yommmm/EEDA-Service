@@ -26,6 +26,10 @@ public class EquipmentInfo {
     @ApiModelProperty(value = "环保设备流水号")
 	private String eId;
 	
+	@Column(name = "e_name")
+    @ApiModelProperty(value = "环保设备名称")
+	private String eName;
+	
 	/**
 	 * 环保设备MAC地址
 	 */
@@ -104,6 +108,14 @@ public class EquipmentInfo {
 
 	public void seteCmd(String eCmd) {
 		this.eCmd = eCmd;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public void seteName(String eName) {
+		this.eName = eName;
 	}
 	
 }

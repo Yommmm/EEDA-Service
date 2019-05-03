@@ -3,13 +3,13 @@ server:
 
 spring:
   application:
-    name: Spring-Boot-JPA
+    name: EEDA-SERVICE
     
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/microservice?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    url: jdbc:mysql://39.108.83.208:3306/eeda?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
     username: root
-    password: root
+    password: EEDA-root-2019
     
   jpa:
     properties:

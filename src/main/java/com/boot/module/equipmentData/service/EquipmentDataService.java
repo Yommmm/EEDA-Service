@@ -1,5 +1,6 @@
 package com.boot.module.equipmentData.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ public class EquipmentDataService {
    	 * @param equipmentData
    	 */
     public EquipmentData saveEquipmentData(EquipmentData equipmentData) throws Exception {
+    	equipmentData.setCreateTime(new Date());
     	equipmentData = this.equipmentDataRepository.save(equipmentData);
     	return equipmentData;
     }
@@ -75,7 +77,7 @@ public class EquipmentDataService {
     }
     
     public List<EquipmentData> list() {
-    	return equipmentDataRepository.findAll();
+    	return equipmentDataRepository.findEdDesc();
     }
     
     
