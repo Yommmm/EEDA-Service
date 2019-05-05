@@ -1,5 +1,7 @@
 package com.boot.module.equipmentInfo.controller;
 
+import java.text.ParseException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.boot.common.quartz.DataStatJob;
 import com.boot.module.equipmentInfo.bean.EquipmentInfo;
 import com.boot.module.equipmentInfo.service.EquipmentInfoService;
 import com.boot.module.equipmentInfo.vo.EquipmentInfoVO;
@@ -32,6 +35,9 @@ public class EquipmentInfoController {
     
     @Autowired
     private EquipmentInfoService equipmentInfoService;
+    
+    @Autowired
+    private DataStatJob dataStatJob;
     
     /**
 	 * 增
@@ -89,6 +95,12 @@ public class EquipmentInfoController {
     @ApiImplicitParam(name = "equipmentInfoVO", value = "设备信息", dataType = "EquipmentInfoVO", paramType = "body")
     public Object getEquipmentInfo(@RequestBody EquipmentInfoVO equipmentInfoVO) throws Exception {
     	return equipmentInfoService.getEquipmentInfo(equipmentInfoVO);
+    }
+    
+    @GetMapping("/scheduler")
+    public Object testScheduler() throws ParseException {
+    	dataStatJob.execute();
+    	return "success";
     }
     
 }
