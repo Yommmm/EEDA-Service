@@ -2,7 +2,6 @@ package com.boot.module.equipmentData.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.boot.module.equipmentData.bean.EDataAvg;
 import com.boot.module.equipmentData.bean.EquipmentData;
+import com.boot.module.equipmentData.repository.EDataAvgRepository;
 import com.boot.module.equipmentData.repository.EquipmentDataRepository;
 import com.boot.module.equipmentData.vo.EquipmentDataVO;
 
@@ -21,6 +22,9 @@ public class EquipmentDataService {
     
     @Autowired
     private EquipmentDataRepository equipmentDataRepository;
+    
+    @Autowired
+    private EDataAvgRepository eDataAvgRepository;
     
     /**
    	 * 保存EquipmentData
@@ -55,6 +59,14 @@ public class EquipmentDataService {
 	 */
     public EquipmentData getEquipmentData(String eMac) throws Exception {
     	EquipmentData equipmentData = equipmentDataRepository.findLast(eMac);
+    	if(null == equipmentData) {
+    		EDataAvg dDataAvg = eDataAvgRepository.findListByEMac(eMac);
+    		equipmentData = new EquipmentData();
+    		equipmentData.seteMac(eMac);
+    		equipmentData.setePressure(dDataAvg.geteAvgPressure());
+    		equipmentData.seteHumidity(dDataAvg.geteAvgHumidity());
+    		equipmentData.seteTemperature(dDataAvg.geteAvgTemperature());
+    	}
     			
     	return equipmentData;
     }
