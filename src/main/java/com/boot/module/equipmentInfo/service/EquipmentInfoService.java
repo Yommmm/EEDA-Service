@@ -1,5 +1,7 @@
 package com.boot.module.equipmentInfo.service;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.boot.module.equipmentInfo.bean.EquipmentInfo;
+import com.boot.module.equipmentInfo.bean.OperateLog;
 import com.boot.module.equipmentInfo.repository.EquipmentInfoRepository;
+import com.boot.module.equipmentInfo.repository.OperateLogRepository;
 import com.boot.module.equipmentInfo.vo.EquipmentInfoVO;
 
 @Service
@@ -21,6 +25,9 @@ public class EquipmentInfoService {
     
     @Autowired
     private EquipmentInfoRepository equipmentInfoRepository;
+    
+    @Autowired
+    private OperateLogRepository operateLogRepository;
     
     /**
    	 * 保存EquipmentInfo
@@ -34,6 +41,13 @@ public class EquipmentInfoService {
     		throw new IllegalArgumentException(equipmentInfo.geteMac());
     	}
     	equipmentInfo = this.equipmentInfoRepository.save(equipmentInfo);
+    	
+    	OperateLog operateLog = new OperateLog();
+    	operateLog.setCreateTime(new Date());
+    	operateLog.seteCmd(equipmentInfo.geteCmd());
+    	operateLog.seteId(equipmentInfo.geteId());
+    	operateLogRepository.save(operateLog);
+    	
     	return equipmentInfo;
     }
     
